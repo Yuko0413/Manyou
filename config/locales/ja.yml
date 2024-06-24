@@ -1,0 +1,51 @@
+ja:
+  activerecord:
+    errors:
+      models:
+        task:
+          attributes:
+            title:
+              blank: "タイトルを入力してください"
+            content:
+              blank: "内容を入力してください"
+  links:
+    global:
+      tasks_index: "タスク一覧"
+      new_task: "タスクを登録する"
+    task_create:
+      tasks_index: "タスク一覧"
+      show_task: "詳細"
+      edit_task: "編集"
+      destroy_task: "削除"
+  confirmations:
+    delete_task: "このタスクを削除してもよろしいですか？"
+  table_headers:
+    task:
+      title: "タイトル"
+      content: "内容"
+      created_at: "作成日時"
+  forms:
+    new_task:
+      page_title: "タスク登録ページ" # 画面のタイトル
+      title_label: "タイトル" # タイトルのフォームラベル
+      content_label: "内容" # 内容のフォームラベル
+      create_button: "登録する" # タスクを登録するボタン
+      back_link: "戻る" # タスク一覧画面に戻るリンク
+    task_detail:
+      page_title: "タスク詳細ページ" # 画面のタイトル
+      title_label: "タイトル" # 名前の項目
+      content_label: "内容" # 内容の項目
+      created_at_label: "作成日時" # 作成日時の項目
+      edit_link: "編集" # タスク編集画面へのリンク
+      back_link: "戻る" # タスク一覧画面に戻るリンク
+    task_edit:
+      page_title: "タスク編集ページ" # 画面のタイトル
+      title_label: "タイトル" # タイトルのフォームラベル
+      content_label: "内容" # 内容のフォームラベル
+      update_button: "更新する" # タスクを更新するボタン
+      back_link: "戻る" # タスク詳細画面に戻るリンク
+  flash:
+    task:
+      create_success: "タスクを登録しました" # タスクの登録に成功した場合のフラッシュメッセージ
+      update_success: "タスクを更新しました" # タスクの更新に成功した場合のフラッシュメッセージ
+      destroy_success: "タスクを削除しました" # タスクを削除した場合のフラッシュメッセージ

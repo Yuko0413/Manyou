@@ -8,4 +8,51 @@ en:
               blank: "Title can't be blank"
             content:
               blank: "Content can't be blank"
+  links:
+    global:
+      tasks_index: "Tasks Index"
+      new_task: "New Task"
+    task_create:
+      tasks_index: "Tasks Index"
+      show_task: "Show"
+      edit_task: "Edit"
+      destroy_task: "Destroy"
+  confirmations:
+    delete_task: "Are you sure?"
+  table_headers:
+    task:
+      title: "Title"
+      content: "Content"
+      created_at: "Created At"
+  forms:
+      new_task:
+        page_title: "New Task" # 画面のタイトル
+        title_label: "Title" # タイトルのフォームラベル
+        content_label: "Content" # 内容のフォームラベル
+        create_button: "Create Task" # タスクを登録するボタン
+        back_link: "Back" # タスク一覧画面に戻るリンク
+      task_detail:
+        page_title: "Show Task" # 画面のタイトル
+        title_label: "Title" # 名前の項目
+        content_label: "Content" # 内容の項目
+        created_at_label: "Created At" # 作成日時の項目
+        edit_link: "Edit" # タスク編集画面へのリンク
+        back_link: "Back" # タスク一覧画面に戻るリンク
+      task_edit: # 追加
+        page_title: "Edit Task" # 画面のタイトル
+        title_label: "Title" # タイトルのフォームラベル
+        content_label: "Content" # 内容のフォームラベル
+        update_button: "Update Task" # タスクを更新するボタン
+        back_link: "Back" # タスク詳細画面に戻るリンク
+  flash:
+    task:
+      create_success: "Task was successfully created." # タスクの登録に成功した場合のフラッシュメッセージ
+      update_success: "Task was successfully updated." # タスクの更新に成功した場合のフラッシュメッセージ
+      destroy_success: "Task was successfully destroyed." # タスクを削除した場合のフラッシュメッセージ
+
+
+      
+
+
+
 
