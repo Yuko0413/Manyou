@@ -1,13 +1,16 @@
 ja:
   activerecord:
-    errors:
-      models:
-        task:
-          attributes:
-            title:
-              blank: "タイトルを入力してください"
-            content:
-              blank: "内容を入力してください"
+    models:
+      task: タスク
+    attributes:
+      task:
+        title: タイトル
+        content: 内容
+  errors:
+    format: "%{attribute}%{message}"
+    messages: 
+      blank: を入力してください
+
   links:
     global:
       tasks_index: "タスク一覧"
@@ -49,3 +52,4 @@ ja:
       create_success: "タスクを登録しました" # タスクの登録に成功した場合のフラッシュメッセージ
       update_success: "タスクを更新しました" # タスクの更新に成功した場合のフラッシュメッセージ
       destroy_success: "タスクを削除しました" # タスクを削除した場合のフラッシュメッセージ
+  
