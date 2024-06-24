@@ -13,12 +13,12 @@ ja:
       tasks_index: "タスク一覧"
       new_task: "タスクを登録する"
     task_create:
-      tasks_index: "タスク一覧"
+      tasks_index: "タスク一覧ページ"
       show_task: "詳細"
       edit_task: "編集"
       destroy_task: "削除"
   confirmations:
-    delete_task: "このタスクを削除してもよろしいですか？"
+    delete_task: "本当に削除してもよろしいですか？"
   table_headers:
     task:
       title: "タイトル"

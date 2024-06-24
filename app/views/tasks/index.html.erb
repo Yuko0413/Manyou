@@ -1,6 +1,5 @@
-<h1><%= t('links.global.tasks_index') %></h1>
+<h1><%= t('links.task_create.tasks_index') %></h1>
 
-<%= link_to t('links.global.new_task'), new_task_path %>
 
 <table>
   <thead>
@@ -18,9 +17,9 @@
       <td><%= task.title %></td>
       <td><%= task.content %></td>
       <td><%= task.created_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M:%S') %></td>
-      <td><%= link_to t('forms.task_index.show_link'), task_path(task), class: 'show-task' %></td>
-      <td><%= link_to t('forms.task_index.edit_link'), edit_task_path(task), class: 'edit-task' %></td>
-      <td><%= link_to t('forms.task_index.destroy_link'), task, method: :delete, data: {confirm: t('confirmations.delete_task')}, class: 'destroy-task' %></td>
+      <td><%= link_to t('links.task_create.show_task'), task_path(task), class: 'show-task' %></td>
+      <td><%= link_to t('links.task_create.edit_task'), edit_task_path(task), class: 'edit-task' %></td>
+      <td><%= link_to t('links.task_create.destroy_task'), task, method: :delete, data: {confirm: t('confirmations.delete_task')}, class: 'destroy-task' %></td>
     </tr>
     <% end %>
   </tbody>
