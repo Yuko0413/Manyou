@@ -1,12 +1,12 @@
+<h1><%= t('links.task_create.tasks_index') %></h1>
 
-<h1>Tasks Index Page</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Created_at</th>
+      <th><%= t('table_headers.task.title') %></th>
+      <th><%= t('table_headers.task.content') %></th>
+      <th><%= t('table_headers.task.created_at') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,13 +16,13 @@
     <tr>
       <td><%= task.title %></td>
       <td><%= task.content %></td>
-      <td><%= task.created_at %></td>
-      <td><%= link_to 'Show',task_path(task), class:'show-task' %></td>
-      <td><%= link_to 'Edit',edit_task_path(task), class:'edit-task' %></td>
-      <td><%= link_to 'Destroy', task, method: :delete, data: {confirm: 'Are you sure?'}, class:'destroy-task' %></td>
+      <td><%= task.created_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M:%S') %></td>
+      <td><%= link_to t('links.task_create.show_task'), task_path(task), class: 'show-task' %></td>
+      <td><%= link_to t('links.task_create.edit_task'), edit_task_path(task), class: 'edit-task' %></td>
+      <td><%= link_to t('links.task_create.destroy_task'), task, method: :delete, data: {confirm: t('confirmations.delete_task')}, class: 'destroy-task' %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
-
+<%= paginate @tasks %>
