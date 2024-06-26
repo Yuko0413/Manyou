@@ -1,7 +1,6 @@
 <%= form_with(model: @task, local: true) do |form| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
-      
       <ul>
         <% @task.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -20,7 +19,22 @@
     <%= form.text_area :content %>
   </div><br>
 
+  <div class="field">
+    <%= form.label :deadline_on, t('forms.new_task.deadline_label') %><br>
+    <%= form.date_field :deadline_on %>
+  </div><br>
+
+  <div class="field">
+    <%= form.label :priority, t('forms.new_task.priority_label') %><br>
+    <%= form.select :priority, Task.priorities.keys.map { |w| [t("enums.task.priority.#{w}"), w] }, include_blank: true, prompt: t('forms.new_task.select_priority_prompt') %>
+  </div><br>
+
+  <div class="field">
+    <%= form.label :status, t('forms.new_task.status_label') %><br>
+    <%= form.select :status, Task.statuses.keys.map { |w| [t("enums.task.status.#{w}"), w] }, include_blank: true, prompt: t('forms.new_task.select_status_prompt') %>
+  </div><br>
+
   <div class="actions">
-    <%= yield(form) if block_given? %>
+    <%= form.submit %>
   </div>
 <% end %>
