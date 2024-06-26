@@ -1,8 +1,8 @@
-<%= form_with(model: @task, local: true) do |form| %>
-  <% if @task.errors.any? %>
+<%= form_with(model: task, local: true) do |form| %>
+  <% if task.errors.any? %>
     <div id="error_explanation">
       <ul>
-        <% @task.errors.full_messages.each do |message| %>
+        <% task.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -10,31 +10,31 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title, t('forms.new_task.title_label') %><br>
+    <%= form.label :title %><br>
     <%= form.text_field :title %>
   </div><br>
 
   <div class="field">
-    <%= form.label :content, t('forms.new_task.content_label') %><br>
+    <%= form.label :content %><br>
     <%= form.text_area :content %>
   </div><br>
 
   <div class="field">
-    <%= form.label :deadline_on, t('forms.new_task.deadline_label') %><br>
+    <%= form.label :deadline_on %><br>
     <%= form.date_field :deadline_on %>
   </div><br>
 
   <div class="field">
-    <%= form.label :priority, t('forms.new_task.priority_label') %><br>
+    <%= form.label :priority %><br>
     <%= form.select :priority, Task.priorities.keys.map { |w| [t("enums.task.priority.#{w}"), w] }, include_blank: true, prompt: t('forms.new_task.select_priority_prompt') %>
   </div><br>
 
   <div class="field">
-    <%= form.label :status, t('forms.new_task.status_label') %><br>
+    <%= form.label :status %><br>
     <%= form.select :status, Task.statuses.keys.map { |w| [t("enums.task.status.#{w}"), w] }, include_blank: true, prompt: t('forms.new_task.select_status_prompt') %>
   </div><br>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit id:button_id %>
   </div>
 <% end %>

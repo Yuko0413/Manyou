@@ -59,6 +59,7 @@ ja:
       content_label: "内容"
       update_button: "更新する"
       back_link: "戻る"
+
   flash:
     task:
       create_success: "タスクを登録しました"
@@ -74,3 +75,7 @@ ja:
         not_started: "未着手"
         in_progress: "着手中"
         completed: "完了"
+  helpers:
+    submit:
+      update: "更新する"
+      create: "登録する"

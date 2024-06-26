@@ -1,9 +1,12 @@
 <h1><%= t('forms.task_edit.page_title') %></h1>
 
-<%= render 'form', task: @task do |form| %>
-  <div class="actions">
-    <%= form.submit t('forms.task_edit.update_button'), id: 'update-task' %>
-  </div><br>
-<% end %>
+<%= render 'form', task: @task, button_id: 'update-task'%>
 
 <%= link_to t('forms.task_edit.back_link'), task_path(@task), id: 'back' %>
+
+<%# デバッグ情報 %>
+<pre>
+  <%= debug I18n.t('forms.task_edit.page_title') %>
+  <%= debug I18n.t('forms.task_edit.update_button') %>
+  <%= debug I18n.t('forms.task_edit.back_link') %>
+  </pre>
