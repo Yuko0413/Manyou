@@ -4,19 +4,22 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
 
-    # ソート条件が存在する場合は適用
-    if params[:sort].present? && params[:direction].present?
-      @tasks = @tasks.order("#{params[:sort]} #{params[:direction]}")
-    else
-      @tasks = @tasks.sorted_by_created_at
-    end
-
     # 検索条件の適用
     if params[:search]
       @tasks = @tasks.with_status(params[:search][:status])
-                     .with_title(params[:search][:title])
+                      .with_title(params[:search][:title])
     end
 
+    # ソート条件が存在する場合は適用
+    if params[:sort].present? && params[:direction].present?
+      if params[:sort] == 'priority'
+        @tasks = @tasks.order(priority: :desc, created_at: :desc)
+      else
+        @tasks = @tasks.order("#{params[:sort]} #{params[:direction]}")
+      end
+    else
+      @tasks = @tasks.sorted_by_created_at
+    end
 
     @tasks = @tasks.page(params[:page]).per(10)
 
