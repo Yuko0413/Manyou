@@ -15,7 +15,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '終了期限昇順に並び替えられたタスク一覧が表示される' do
         click_link '終了期限'
         sleep 1  # 必要に応じて待機
-        task_titles = all('.task-title').map(&:text)  # クラス名の確認
+        task_titles = page.all('tbody tr').map { |row| row.find('td:nth-child(1)').text }
         expect(task_titles).to eq ['third_task', 'second_task', 'first_task']
       end
     end
@@ -24,7 +24,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '優先度の高い順に並び替えられたタスク一覧が表示される' do
         click_link '優先度'
         sleep 1  # 必要に応じて待機
-        task_titles = all('.task-title').map(&:text)  # クラス名の確認
+        task_titles = page.all('tbody tr').map { |row| row.find('td:nth-child(1)').text }
         expect(task_titles).to eq ['second_task', 'first_task', 'third_task']
       end
     end

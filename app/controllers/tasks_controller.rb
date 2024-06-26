@@ -2,14 +2,16 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.sorted_by_created_at
+    @tasks = Task.all
 
-    if params[:sort_deadline_on]
-      @tasks = @tasks.sorted_by_deadline
-    elsif params[:sort_priority]
-      @tasks = @tasks.sorted_by_priority
+    # ソート条件が存在する場合は適用
+    if params[:sort].present? && params[:direction].present?
+      @tasks = @tasks.order("#{params[:sort]} #{params[:direction]}")
+    else
+      @tasks = @tasks.sorted_by_created_at
     end
 
+    # 検索条件の適用
     if params[:search]
       @tasks = @tasks.with_status(params[:search][:status])
                      .with_title(params[:search][:title])
@@ -19,6 +21,7 @@ class TasksController < ApplicationController
 
     # デバッグ用のログ出力
     logger.debug "検索条件: #{params[:search].inspect}" if params[:search]
+    logger.debug "ソート条件: sort=#{params[:sort]}, direction=#{params[:direction]}"
   end
 
   def new
