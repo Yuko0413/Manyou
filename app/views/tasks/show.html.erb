@@ -17,6 +17,21 @@
   </p>
 
   <p>
+    <strong><%= t('forms.new_task.deadline_label') %>:</strong>
+    <%= @task.deadline_on %>
+  </p>
+
+  <p>
+    <strong><%= t('forms.new_task.priority_label') %>:</strong>
+    <%= @task.display_priority%>
+  </p>
+
+  <p>
+    <strong><%= t('forms.new_task.status_label') %>:</strong>
+    <%= @task.display_status %>
+  </p>
+
+  <p>
     <%= link_to t('forms.task_detail.edit_link'), edit_task_path(@task), id: 'edit-task' %> |
     <%= link_to t('forms.task_detail.back_link'), tasks_path, id: 'back' %>
   </p>

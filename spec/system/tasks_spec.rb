@@ -1,46 +1,64 @@
 require 'rails_helper'
 
 RSpec.describe 'タスク管理機能', type: :system do
-  describe '一覧表示機能' do
+  # テストデータの作成
+  let!(:task1) { create(:task, title: 'first_task', deadline_on: '2022-02-18', priority: 'medium', status: 'not_started') }
+  let!(:task2) { create(:task, title: 'second_task', deadline_on: '2022-02-17', priority: 'high', status: 'in_progress') }
+  let!(:task3) { create(:task, title: 'third_task', deadline_on: '2022-02-16', priority: 'low', status: 'completed') }
+  
+  before do
+    visit tasks_path
+  end
 
-        # テストデータの作成
-        let!(:task1) { Task.create!(title: 'first_task', content: 'First Content', created_at: '2022-02-18') }
-        let!(:task2) { Task.create!(title: 'second_task', content: 'Second Content', created_at: '2022-02-17') }
-        let!(:task3) { Task.create!(title: 'third_task', content: 'Third Content', created_at: '2022-02-16') }
-        
-        before do
-          visit tasks_path
-        end
-
-        context '複数のタスクが存在する場合' do
-          it '作成日時の降順で表示される' do
-
-        # タスクの順序を確認
-        tasks = all('tbody tr')
-
-        expect(tasks[0]).to have_content 'first_task'
-        expect(tasks[1]).to have_content 'second_task'
-        expect(tasks[2]).to have_content 'third_task'
+  describe 'ソート機能' do
+    context '「終了期限」というリンクをクリックした場合' do
+      it '終了期限昇順に並び替えられたタスク一覧が表示される' do
+        click_link '終了期限'
+        sleep 1  # 必要に応じて待機
+        task_titles = page.all('tbody tr').map { |row| row.find('td:nth-child(1)').text }
+        expect(task_titles).to eq ['third_task', 'second_task', 'first_task']
       end
     end
 
-    context '新たにタスクを作成した場合' do
-      before do
-        visit new_task_path
-        fill_in 'タイトル', with: 'New Task'
-        fill_in '内容', with: 'New Content'
-        click_button '登録する'
-        visit tasks_path
+    context '「優先度」というリンクをクリックした場合' do
+      it '優先度の高い順に並び替えられたタスク一覧が表示される' do
+        click_link '優先度'
+        sleep 1  # 必要に応じて待機
+        task_titles = page.all('tbody tr').map { |row| row.find('td:nth-child(1)').text }
+        expect(task_titles).to eq ['second_task', 'first_task', 'third_task']
       end
+    end
+  end
 
-      it '新しいタスクが一番上に表示される' do
+  describe '検索機能' do
+    context 'タイトルであいまい検索をした場合' do
+      it '検索ワードを含むタスクのみ表示される' do
+        fill_in 'search[title]', with: 'first'
+        click_button '検索'
+        expect(page).to have_content 'first_task'
+        expect(page).not_to have_content 'second_task'
+        expect(page).not_to have_content 'third_task'
+      end
+    end
 
-        tasks = all('tbody tr')
+    context 'ステータスで検索をした場合' do
+      it '検索したステータスに一致するタスクのみ表示される' do
+        select '未着手', from: 'search[status]'
+        click_button '検索'
+        expect(page).to have_content 'first_task'
+        expect(page).not_to have_content 'second_task'
+        expect(page).not_to have_content 'third_task'
+      end
+    end
 
-        expect(tasks[0]).to have_content 'New Task'
-        expect(tasks[1]).to have_content 'first_task'
-        expect(tasks[2]).to have_content 'second_task'
-
+    context 'タイトルとステータスで検索をした場合' do
+      it '検索ワードをタイトルに含み、かつステータスに一致するタスクのみ表示される' do
+        fill_in 'search[title]', with: 'task'
+        select '完了', from: 'search[status]'
+        click_button '検索'
+        expect(page).to have_content 'third_task'
+        expect(page).not_to have_content 'first_task'
+        expect(page).not_to have_content 'second_task'
       end
     end
   end

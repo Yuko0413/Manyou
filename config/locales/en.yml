@@ -31,6 +31,7 @@ en:
         content_label: "Content" # 内容のフォームラベル
         create_button: "Create Task" # タスクを登録するボタン
         back_link: "Back" # タスク一覧画面に戻るリンク
+        deadline_label: "deadline_on"
       task_detail:
         page_title: "Show Task" # 画面のタイトル
         title_label: "Title" # 名前の項目

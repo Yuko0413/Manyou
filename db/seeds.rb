@@ -1,20 +1,14 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-Task.delete_all
-
-# 50件のタスクデータを作成
-50.times do |i|
-  Task.create!(
-    title: "Task #{i + 1}",
-    content: "This is the content for task #{i + 1}",
-    created_at: Time.now - rand(1..100).days # 過去100日間のランダムな作成日時
-  )
-end
-
-puts "50件のタスクデータを作成しました。"
+Task.create!(
+  [
+    { title: 'Task 1', content: 'Content for task 1', deadline_on: Date.today + 1.day, priority: 'high', status: 'not_started' },
+    { title: 'Task 2', content: 'Content for task 2', deadline_on: Date.today + 2.days, priority: 'medium', status: 'in_progress' },
+    { title: 'Task 3', content: 'Content for task 3', deadline_on: Date.today + 3.days, priority: 'low', status: 'completed' },
+    { title: 'Task 4', content: 'Content for task 4', deadline_on: Date.today + 4.days, priority: 'high', status: 'not_started' },
+    { title: 'Task 5', content: 'Content for task 5', deadline_on: Date.today + 5.days, priority: 'medium', status: 'in_progress' },
+    { title: 'Task 6', content: 'Content for task 6', deadline_on: Date.today + 6.days, priority: 'low', status: 'completed' },
+    { title: 'Task 7', content: 'Content for task 7', deadline_on: Date.today + 7.days, priority: 'high', status: 'not_started' },
+    { title: 'Task 8', content: 'Content for task 8', deadline_on: Date.today + 8.days, priority: 'medium', status: 'in_progress' },
+    { title: 'Task 9', content: 'Content for task 9', deadline_on: Date.today + 9.days, priority: 'low', status: 'completed' },
+    { title: 'Task 10', content: 'Content for task 10', deadline_on: Date.today + 10.days, priority: 'high', status: 'not_started' }
+  ]
+)
