@@ -19,7 +19,7 @@
         <li><%= link_to 'タスクを登録する', new_task_path, id: 'new-task' %></li>
         <% if logged_in? %>
           <li><%= link_to 'アカウント設定', user_path(current_user), id: 'account-setting' %></li>
-          <li><%= link_to 'ログアウト', logout_path, method: :delete, id: 'sign-out' %></li>
+          <li><%= link_to 'ログアウト', session_path(current_user), method: :delete, id: 'sign-out' %></li>
         <% end %>
       </ul>
     </nav>

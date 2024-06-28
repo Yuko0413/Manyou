@@ -17,10 +17,10 @@
         <li><%= link_to t('links.global.tasks_index'), root_path, id: 'tasks-index' %></li>
         <li><%= link_to t('links.global.new_task'), new_task_path, id: 'new-task' %></li>
         <li><%= link_to t('links.global.account_setting'), user_path(current_user), id: 'account-setting' %></li> <!-- 変更 -->
-        <li><%= link_to t('links.global.logout'), logout_path, method: :delete, id: 'sign-out' %></li>
+        <li><%= link_to t('links.global.logout'), session_path(current_user), method: :delete, id: 'sign-out' %></li>
         <% else %>
           <li><%= link_to t('links.global.sign_up'), new_user_path, id: 'sign-up' %></li>
-          <li><%= link_to t('links.global.sign_in'), login_path, id: 'sign-in' %></li>
+          <li><%= link_to t('links.global.sign_in'), new_session_path, id: 'sign-in' %></li>
         <% end %>
       </ul>
     </nav>
