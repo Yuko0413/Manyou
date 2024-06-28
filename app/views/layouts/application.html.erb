@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>CdpWebManyoTask</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>CdpWebManyoTask</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <p id="notice"><%= notice %></p>
-    <li><%= link_to t('links.global.tasks_index'), root_path, id: 'tasks-index' %></li>
-    <li><%= link_to t('links.global.new_task'), new_task_path, id:'new-task' %></li>
-    <%= yield %>    
-  </body>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <% if logged_in? %>
+        <li><%= link_to t('links.global.tasks_index'), root_path, id: 'tasks-index' %></li>
+        <li><%= link_to t('links.global.new_task'), new_task_path, id: 'new-task' %></li>
+        <li><%= link_to t('links.global.account_setting'), user_path(current_user), id: 'account-setting' %></li> <!-- 変更 -->
+        <li><%= link_to t('links.global.logout'), logout_path, method: :delete, id: 'sign-out' %></li>
+        <% else %>
+          <li><%= link_to t('links.global.sign_up'), new_user_path, id: 'sign-up' %></li>
+          <li><%= link_to t('links.global.sign_in'), login_path, id: 'sign-in' %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
+
+  <p id="notice"><%= notice %></p>
+  <%= yield %>    
+</body>
 </html>

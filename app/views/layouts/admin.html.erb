@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><%= link_to 'ユーザ一覧', admin_users_path, id: 'users-index' %></li>
+        <li><%= link_to 'ユーザを登録する', new_admin_user_path, id: 'add-user' %></li>
+        <li><%= link_to 'タスク一覧', tasks_path, id: 'tasks-index' %></li>
+        <li><%= link_to 'タスクを登録する', new_task_path, id: 'new-task' %></li>
+        <% if logged_in? %>
+          <li><%= link_to 'アカウント設定', user_path(current_user), id: 'account-setting' %></li>
+          <li><%= link_to 'ログアウト', logout_path, method: :delete, id: 'sign-out' %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
+
+  <p id="notice"><%= notice %></p>
+  <%= yield %>    
+</body>
+</html>

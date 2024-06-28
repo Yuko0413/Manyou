@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       task: タスク
+      user: ユーザー
     attributes:
       task:
         title: タイトル
@@ -9,15 +10,28 @@ ja:
         deadline_on: 終了期限
         priority: 優先度
         status: ステータス
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認
+        admin: 管理者権限
   errors:
     format: "%{attribute}%{message}"
     messages: 
       blank: を入力してください
-
+      inclusion: "は一覧にありません" # 追加
+      taken: はすでに使用されています
+      too_short: は%{count}文字以上で入力してください
+      confirmation: と%{attribute}の入力が一致しません
   links:
     global:
       tasks_index: "タスク一覧"
       new_task: "タスクを登録する"
+      sign_up: "アカウント登録"
+      sign_in: "ログイン"
+      account_setting: "アカウント設定"
+      logout: "ログアウト"
     task_create:
       tasks_index: "タスク一覧ページ"
       show_task: "詳細"
