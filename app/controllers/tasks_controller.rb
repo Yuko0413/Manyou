@@ -69,4 +69,10 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
   end
+
+  def authorize_user
+    if @task.user != current_user
+      redirect_to tasks_path, notice: 'アクセス権限がありません'
+    end
+  end
 end

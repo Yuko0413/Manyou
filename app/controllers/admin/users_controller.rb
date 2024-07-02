@@ -53,7 +53,7 @@ module Admin
 
     def require_admin
       unless current_user&.admin?
-        redirect_to root_path, alert: 'You are not authorized to access this page.'
+        redirect_to tasks_path, notice: '管理者以外アクセスできません'
       end
     end
   end

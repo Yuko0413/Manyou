@@ -4,6 +4,9 @@ ja:
       task: タスク
       user: ユーザー
     attributes:
+      base:
+        ensure_an_admin_remains: "管理者が0人になるため削除できません"
+        ensure_an_admin_remains_on_update: "管理者が0人になるため権限を変更できません"
       task:
         title: タイトル
         content: 内容
