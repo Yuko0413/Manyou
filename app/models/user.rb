@@ -10,8 +10,24 @@ class User < ApplicationRecord
   before_destroy :ensure_an_admin_remains
   before_update :ensure_an_admin_remains_on_update
 
+  def translated_priority(priority)
+    case priority
+    when 'low'
+      '低'
+    when 'medium'
+      '中'
+    when 'high'
+      '高'
+    else
+      priority
+    end
+  end
+
   private
 
+  def downcase_email
+    self.email = email.downcase
+  end
 
   def ensure_an_admin_remains
     if User.where(admin: true).count == 1 && self.admin?

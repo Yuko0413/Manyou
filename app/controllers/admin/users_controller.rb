@@ -30,7 +30,7 @@ module Admin
 
     def update
       if @user.update(user_params)
-        redirect_to admin_user_path(@user), notice: 'ユーザを更新しました'
+        redirect_to admin_users_path, notice: 'ユーザを更新しました'
       else
         render :edit
       end
