@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
   helper_method :current_user, :logged_in?
+  before_action :login_required
 
   private
 
@@ -10,9 +11,9 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale] || I18n.default_locale
   end
 
-  def default_url_options(options = {})
-    { locale: I18n.locale }.merge options
-  end
+  # def default_url_options(options = {})
+  #   { locale: I18n.locale }.merge options
+  # end
 
   def current_user  # 追加
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -21,6 +22,12 @@ class ApplicationController < ActionController::Base
   def logged_in?  # 追加
     !current_user.nil?
   end
+
+  def login_required
+    redirect_to new_session_path, notice: "ログインしてください" unless current_user
+  end
 end
+
+
   #helper :all
 #end

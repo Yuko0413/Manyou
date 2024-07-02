@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :login_required, only: [:new, :create]
+  
   def new
   end
 
@@ -19,6 +21,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to root_path, notice: 'ログアウトしました'
+    redirect_to new_session_path, notice: 'ログアウトしました'
   end
 end

@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 2024_06_27_024302) do
     t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "deadline_on"
-    t.integer "priority", default: 0
-    t.integer "status", default: 0
+    t.date "deadline_on", null: false
+    t.integer "priority", default: 0, null: false
+    t.integer "status", default: 0, null: false
     t.bigint "user_id", null: false
     t.index ["status"], name: "index_tasks_on_status"
     t.index ["user_id"], name: "index_tasks_on_user_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2024_06_27_024302) do
     t.string "name", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
-    t.boolean "admin", null: false
+    t.boolean "admin", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :sessions
   resources :tasks
-  resources :users, only: [:new, :create, :edit, :update, :show]
+  resources :users, only: [:new, :create, :edit, :update, :show, :destroy]
 
   namespace :admin do
     resources :users

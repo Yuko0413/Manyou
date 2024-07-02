@@ -1,2 +1,7 @@
 <h1>ユーザ登録ページ</h1>
-<%= render 'form', user: @user %>
+<%= form_with(model: [:admin, @user], local: true) do |form| %>
+  <%= render 'form', user: @user %>
+  <div>
+    <%= form.submit '登録する', id: 'create-user' %>
+  </div>
+<% end %>

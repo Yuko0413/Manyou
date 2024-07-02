@@ -1,2 +1,11 @@
 <h1>ユーザ編集ページ</h1>
+<%= form_with(model: [:admin, @user], local: true) do |form| %>
 <%= render 'form', user: @user %>
+
+<div>
+  <%= form.submit '更新する', id: 'update-user' %>
+</div>
+<% end %>
+
+<%= link_to '戻る', admin_users_path, id: 'back' %>
+

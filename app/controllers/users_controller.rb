@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  skip_before_action :login_required, only: [:new, :create]
+
+  
   def new
     @user = User.new
   end
@@ -23,6 +26,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to root_path, notice: "アカウントを更新しました"
     else
+      #Rails.logger.debug(@user.errors.full_messages)  # エラーメッセージのログ出力
       render :edit
     end
   end

@@ -1,11 +1,12 @@
-<h1>ユーザ一覧ページ</h1>
+<h1><%= 'ユーザ一覧ページ' %></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Admin</th>
+      <th><%= t('table_headers.user.name') %></th>
+      <th><%= t('table_headers.user.email') %></th>
+      <th><%= t('table_headers.user.admin') %></th>
+      <th><%= t('table_headers.task.task_count') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,13 +16,14 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= user.admin? ? 'Yes' : 'No' %></td>
-        <td><%= link_to 'Show', admin_user_path(user) %></td>
-        <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
-        <td><%= link_to 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= user.admin? ? 'あり' : 'なし' %></td>
+        <td><%= user.tasks.count %></td>
+        <td><%= link_to t('links.user.show'), admin_user_path(user), class: 'show-user' %></td>
+        <td><%= link_to t('links.user.edit'), edit_admin_user_path(user),class: 'edit-user' %></td>
+        <td><%= link_to t('links.user.destroy'), admin_user_path(user), method: :delete, data: { confirm: t('messages.user_destroy_confirmation') }, class: 'destroy-user' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'New User', new_admin_user_path %>
+<%= link_to t('links.global.new_task'), new_admin_user_path %>
