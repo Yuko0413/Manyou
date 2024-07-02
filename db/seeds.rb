@@ -12,3 +12,46 @@
 #     { title: 'Task 10', content: 'Content for task 10', deadline_on: Date.today + 10.days, priority: 'high', status: 'not_started' }
 #   ]
 # )
+
+# db/seeds.rb
+
+# ユーザの作成
+user = User.create!(
+  name: 'user_name',
+  email: 'user@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  admin: false
+)
+
+admin = User.create!(
+  name: 'admin_name',
+  email: 'admin@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  admin: true
+)
+
+# タスクの作成
+50.times do |i|
+  Task.create!(
+    title: "task_title_#{i}",
+    content: "task_content_#{i}",
+    deadline_on: Time.now + (i + 1).days,
+    priority: [:low, :medium, :high].sample,
+    status: [:not_started, :in_progress, :completed].sample,
+    user: user
+  )
+end
+
+50.times do |i|
+  Task.create!(
+    title: "task_title_#{i + 50}",
+    content: "task_content_#{i + 50}",
+    deadline_on: Time.now + (i + 1).days,
+    priority: [:low, :medium, :high].sample,
+    status: [:not_started, :in_progress, :completed].sample,
+    user: admin
+  )
+end
+

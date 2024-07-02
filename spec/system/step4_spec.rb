@@ -5,6 +5,10 @@ RSpec.describe 'step4', type: :system do
   let!(:user) { User.create(name: 'user_name', email: 'user@email.com', password: 'password') }
   let!(:admin) { User.create(name: 'admin_name', email: 'admin@email.com', password: 'password', admin: true) }
 
+
+   before do
+    driven_by(:selenium_chrome_headless)
+   end
   describe '画面遷移要件' do
     describe '1.要件通りにパスのプレフィックスが使用できること' do
       context 'ログアウト中の場合' do
