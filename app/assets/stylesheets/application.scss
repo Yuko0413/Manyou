@@ -1,0 +1,14 @@
+// Import Bootstrap
+@import 'bootstrap';
+
+// Import other stylesheets
+@import 'tasks';
+
+.navbar-nav .nav-link {
+    margin-right: 10px;
+}
+  
+.alert {
+    margin-top: 10px;
+}
+  

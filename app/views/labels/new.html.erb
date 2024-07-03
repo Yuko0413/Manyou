@@ -1,0 +1,22 @@
+<h1>ラベル登録ページ</h1>
+
+<%= form_with(model: @label, local: true) do |form| %>
+  <% if @label.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @label.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name,'名前' %><br>
+    <%= form.text_field :name %>
+  </div><br>
+
+  <div class="actions">
+    <%= form.submit '登録する', id: 'create-label' %>
+  </div>
+<% end %>

@@ -9,7 +9,8 @@ class TasksController < ApplicationController
     # 検索条件の適用
     if params[:search]
       @tasks = @tasks.with_status(params[:search][:status])
-                      .with_title(params[:search][:title])
+                     .with_title(params[:search][:title])
+                     .with_label(params[:search][:label_id])
     end
 
     # ソート条件が存在する場合は適用
@@ -61,6 +62,7 @@ class TasksController < ApplicationController
     @task.destroy
     redirect_to tasks_path, notice: t('flash.task.destroy_success')
   end
+  
 
   private
 
@@ -69,7 +71,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
+    params.require(:task).permit(:title, :content, :deadline_on, :priority, :status, { label_ids: [] })
   end
 
   def authorize_user
