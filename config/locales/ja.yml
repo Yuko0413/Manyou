@@ -2,27 +2,48 @@ ja:
   activerecord:
     models:
       task: タスク
+      user: ユーザー
     attributes:
+      base:
+        ensure_an_admin_remains: "管理者が0人になるため削除できません"
+        ensure_an_admin_remains_on_update: "管理者が0人になるため権限を変更できません"
       task:
         title: タイトル
         content: 内容
         deadline_on: 終了期限
         priority: 優先度
         status: ステータス
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
+        admin: 管理者権限
   errors:
     format: "%{attribute}%{message}"
     messages: 
       blank: を入力してください
-
+      inclusion: "は一覧にありません" # 追加
+      taken: はすでに使用されています
+      too_short: は%{count}文字以上で入力してください
+      confirmation: と%{attribute}の入力が一致しません
   links:
     global:
       tasks_index: "タスク一覧"
       new_task: "タスクを登録する"
+      sign_up: "アカウント登録"
+      sign_in: "ログイン"
+      account_setting: "アカウント設定"
+      logout: "ログアウト"
     task_create:
       tasks_index: "タスク一覧ページ"
       show_task: "詳細"
       edit_task: "編集"
       destroy_task: "削除"
+    user:
+      show: "詳細"
+      edit: "編集"
+      destroy: "削除"
   confirmations:
     delete_task: "本当に削除してもよろしいですか？"
   table_headers:
@@ -33,6 +54,11 @@ ja:
       deadline_on: "終了期限"
       priority: "優先度"
       status: "ステータス"
+      task_count: "タスク数" 
+    user:
+      name: "名前"
+      email: "メールアドレス"
+      admin: "管理者権限"
   forms:
     new_task:
       page_title: "タスク登録ページ"
@@ -79,3 +105,7 @@ ja:
     submit:
       update: "更新する"
       create: "登録する"
+  messages:
+    user_destroy_confirmation: "本当に削除してもよろしいですか？"
+    admin_yes: "はい"
+    admin_no: "いいえ"
