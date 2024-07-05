@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     if params[:search]
       @tasks = @tasks.with_status(params[:search][:status])
                      .with_title(params[:search][:title])
-                     .with_label(params[:search][:label_id])
+                     .with_label(params[:search][:label])
     end
 
     # ソート条件が存在する場合は適用
