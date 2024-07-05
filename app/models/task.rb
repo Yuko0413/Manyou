@@ -1,6 +1,8 @@
 class Task < ApplicationRecord
 
   belongs_to :user
+  has_many :labelings, dependent: :destroy
+  has_many :labels, through: :labelings
 
   validates :title, presence: true
   validates :content, presence: true
@@ -16,6 +18,8 @@ class Task < ApplicationRecord
   scope :sorted_by_priority, -> { order(priority: :desc) }
   scope :with_status, ->(status) { where(status: status) if status.present? }
   scope :with_title, ->(title) { where("title LIKE ?", "%#{title}%") if title.present? }
+  scope :with_label, ->(label) { joins(:labels).where(labels: { id: label }) if label.present? }
+
 
   def display_priority
     I18n.t("enums.task.priority.#{priority}")

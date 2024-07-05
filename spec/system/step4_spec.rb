@@ -128,6 +128,7 @@ RSpec.describe 'step4', type: :system do
         end
         it 'ユーザ編集画面（管理者用）' do
           find('#users-index').click
+    
           all(".edit-user")[0].click
           expect(page).to have_css '#update-user'
           expect(page).to have_css '#back'

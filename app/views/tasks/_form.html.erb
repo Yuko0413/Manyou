@@ -34,6 +34,14 @@
     <%= form.select :status, Task.statuses.keys.map { |w| [t("enums.task.status.#{w}"), w] }, include_blank: true, prompt: t('forms.new_task.select_status_prompt') %>
   </div><br>
 
+  <div class="field">
+    <%= form.label :label_ids, 'ラベル' %><br>
+    <% current_user.labels.each do |label| %>
+      <%= check_box_tag 'task[label_ids][]', label.id, @task.labels.include?(label), id: "task_label_ids_#{label.id}" %>
+      <%= label_tag "task_label_ids_#{label.id}", label.name %><br>
+    <% end %>
+  </div><br>
+
   <div class="actions">
     <%= form.submit id:button_id %>
   </div>
