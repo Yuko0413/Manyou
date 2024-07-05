@@ -14,7 +14,7 @@
 
     <div class="col-4 mb-2">
       <%= label_tag 'search[label_id]', 'ラベル', class: 'mr-2' %>
-      <%= select_tag 'search[label_id]', options_from_collection_for_select(current_user.labels, :id, :name, params.dig(:search, :label_id)), include_blank: true, class: 'form-control' %>
+      <%= select_tag 'search[label_id]', options_from_collection_for_select(current_user.labels, :id, :name, params.dig(:search, :label_id)), include_blank: true, class: 'form-control', id: 'search_label' %>
     </div>
   </div>
   <div class="col-12 mb-2" style="text-align: end;">

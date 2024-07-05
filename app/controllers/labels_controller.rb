@@ -12,7 +12,7 @@ class LabelsController < ApplicationController
   def create
     @label = current_user.labels.build(label_params)
     if @label.save
-      redirect_to labels_path, notice: 'ラベルを作成しました'
+      redirect_to labels_path, notice: 'ラベルを登録しました'
     else
       render :new
     end
