@@ -35,6 +35,9 @@ module CdpWebManyoTask
     # タイムゾーンの設定
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
+
+    # カスタムエラーページの設定
+    config.exceptions_app = self.routes
   end
 end
 
