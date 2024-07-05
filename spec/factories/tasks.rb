@@ -5,5 +5,6 @@ FactoryBot.define do
     deadline_on { Date.today }
     priority { 'low' }
     status { 'not_started' }
+    association :user
   end
 end

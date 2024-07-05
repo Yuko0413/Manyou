@@ -1,6 +1,6 @@
 <h1><%= t('forms.new_task.page_title') %></h1>
 
-<%= render 'form', task: @task, button_id: 'create-task'%>
+<%= render 'form', task: @task, button_text: t('forms.new_task.create_button'), button_id: 'create-task'%>
 
 
-<%= link_to t('forms.new_task.back_link'), tasks_path, id: 'back' %>
+<%= link_to t('forms.new_task.back_link'), class: 'btn btn-secondary mt-2', tasks_path, id: 'back' %>

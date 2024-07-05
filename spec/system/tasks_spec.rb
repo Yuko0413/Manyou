@@ -61,5 +61,31 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).not_to have_content 'second_task'
       end
     end
+
+    context 'ラベルで検索をした場合' do
+      let!(:user) { FactoryBot.create(:user) }
+      let!(:label1) { FactoryBot.create(:label, name: 'ラベル1', user: user) }
+      let!(:label2) { FactoryBot.create(:label, name: 'ラベル2', user: user) }
+      let!(:task1) { FactoryBot.create(:task, title: 'タスク1', user: user, labels: [label1]) }
+      let!(:task2) { FactoryBot.create(:task, title: 'タスク2', user: user, labels: [label2]) }
+      let!(:task3) { FactoryBot.create(:task, title: 'タスク3', user: user, labels: [label1, label2]) }
+  
+      before do
+        # ログイン処理
+        visit new_session_path
+        fill_in 'Email', with: user.email
+        fill_in 'Password', with: user.password
+        click_button 'ログイン'
+        visit tasks_path
+      end
+  
+      it "そのラベルの付いたタスクがすべて表示される" do
+        select 'ラベル1', from: 'search[label_id]'
+        click_button '検索'
+        expect(page).to have_content 'タスク1'
+        expect(page).to have_content 'タスク3'
+        expect(page).not_to have_content 'タスク2'
+      end
+    end
   end
 end

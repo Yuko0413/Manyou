@@ -1,34 +1,35 @@
-<h1><%= t('links.task_create.tasks_index') %></h1>
+<h1 class="mb-4"><%= t('links.task_create.tasks_index') %></h1>
 
-<%= form_with url: tasks_path, method: :get, scope: :search, local: true do %>
-  <div class="field">
-    <%= label_tag 'search[status]', t('forms.new_task.status_label') %>
-    <%= select_tag 'search[status]', options_for_select(Task.statuses.keys.map { |w| [t("enums.task.status.#{w}"), w] }, params.dig(:search, :status)), include_blank: true %>
-  </div><br>
+<%= form_with url: tasks_path, method: :get, scope: :search, local: true, class: 'form-inline' do %>
+  <div class="form-row align-items-center" style="display: flex;">
+    <div class="col-4 mb-2">
+      <%= label_tag 'search[status]', t('forms.new_task.status_label'), class: 'mr-2' %>
+      <%= select_tag 'search[status]', options_for_select(Task.statuses.keys.map { |w| [t("enums.task.status.#{w}"), w] }, params.dig(:search, :status)), include_blank: true, class: 'form-control' %>
+    </div>
 
-  <div class="field">
-    <%= label_tag 'search[title]', t('forms.new_task.title_label') %>
-    <%= text_field_tag 'search[title]', params.dig(:search, :title) %>
-  </div><br>
+    <div class="col-4 mb-2">
+      <%= label_tag 'search[title]', t('forms.new_task.title_label'), class: 'mr-2' %>
+      <%= text_field_tag 'search[title]', params.dig(:search, :title), class: 'form-control' %>
+    </div>
 
-  <div class="field">
-    <%= label_tag 'search[label_id]', 'ラベル' %>
-    <%= select_tag 'search[label_id]', options_from_collection_for_select(current_user.labels, :id, :name, params.dig(:search, :label_id)), include_blank: true %>
-  </div><br>
-
-  <div class="actions">
-    <%= submit_tag t('forms.new_task.search_button'), id: 'search_task' %>
+    <div class="col-4 mb-2">
+      <%= label_tag 'search[label_id]', 'ラベル', class: 'mr-2' %>
+      <%= select_tag 'search[label_id]', options_from_collection_for_select(current_user.labels, :id, :name, params.dig(:search, :label_id)), include_blank: true, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="col-12 mb-2" style="text-align: end;">
+    <%= submit_tag t('forms.new_task.search_button'), class: 'btn btn-primary' %>
   </div>
 <% end %>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th><%= t('table_headers.task.title') %></th>
       <th><%= t('table_headers.task.content') %></th>
       <th><%= t('table_headers.task.created_at') %></th>
-      <th><%= link_to t('table_headers.task.deadline_on'), tasks_path(sort: 'deadline_on', direction: 'asc') %></th>
-      <th><%= link_to t('table_headers.task.priority'), tasks_path(sort: 'priority', direction: 'desc') %></th>
+      <th><%= link_to t('table_headers.task.deadline_on'), tasks_path(sort: 'deadline_on', direction: 'asc'), class: 'text-decoration-none' %></th>
+      <th><%= link_to t('table_headers.task.priority'), tasks_path(sort: 'priority', direction: 'desc'), class: 'text-decoration-none' %></th>
       <th><%= t('table_headers.task.status') %></th>
       <th>ラベル</th>
       <th colspan="3"></th>
@@ -45,9 +46,9 @@
       <td><%= task.display_priority %></td>
       <td><%= task.display_status %></td>
       <td><%= task.labels.map(&:name).join(', ') %></td>
-      <td><%= link_to t('links.task_create.show_task'), task_path(task), class: 'show-task' %></td>
-      <td><%= link_to t('links.task_create.edit_task'), edit_task_path(task), class: 'edit-task' %></td>
-      <td><%= link_to t('links.task_create.destroy_task'), task, method: :delete, data: {confirm: t('confirmations.delete_task')}, class: 'destroy-task' %></td>
+      <td><%= link_to t('links.task_create.show_task'), task_path(task), class: 'btn btn-primary show-task' %></td>
+      <td><%= link_to t('links.task_create.edit_task'), edit_task_path(task), class: 'btn btn-primary edit-task' %></td>
+      <td><%= link_to t('links.task_create.destroy_task'), task, method: :delete, data: { confirm: t('confirmations.delete_task') }, class: 'btn btn-danger destroy-task' %></td>
     </tr>
     <% end %>
   </tbody>

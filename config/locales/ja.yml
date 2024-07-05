@@ -3,6 +3,7 @@ ja:
     models:
       task: タスク
       user: ユーザー
+      label: ラベル
     attributes:
       base:
         ensure_an_admin_remains: "管理者が0人になるため削除できません"
@@ -19,6 +20,9 @@ ja:
         password: パスワード
         password_confirmation: パスワード（確認）
         admin: 管理者権限
+      label:
+        name: 名前
+        user: ユーザー
   errors:
     format: "%{attribute}%{message}"
     messages: 
