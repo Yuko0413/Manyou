@@ -1,4 +1,5 @@
 class ErrorsController < ApplicationController
+  skip_before_action :login_required
   def not_found
     render status: 404
   end

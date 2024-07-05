@@ -18,7 +18,7 @@ class Task < ApplicationRecord
   scope :sorted_by_priority, -> { order(priority: :desc) }
   scope :with_status, ->(status) { where(status: status) if status.present? }
   scope :with_title, ->(title) { where("title LIKE ?", "%#{title}%") if title.present? }
-  scope :with_label, ->(label_id) { joins(:labels).where(labels: { id: label_id }) if label_id.present? }
+  scope :with_label, ->(label) { joins(:labels).where(labels: { id: label }) if label.present? }
 
 
   def display_priority
