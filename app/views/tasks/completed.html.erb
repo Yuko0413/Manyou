@@ -1,0 +1,30 @@
+<h1>完了したタスク</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>内容</th>
+      <th>対応者</th>
+      <th>完了日時</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @completed_tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.content %></td>
+        <td><%= task.labels.map(&:name).join(', ') %></td>
+        <td>
+          <% if task.completed_at.present? %>
+            <%= task.completed_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M:%S') %>
+            <% else %>
+              N/A
+            <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '戻る', tasks_path, class: 'btn btn-secondary mt-2' %>

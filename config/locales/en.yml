@@ -27,8 +27,8 @@ en:
   forms:
       new_task:
         page_title: "New Task" # 画面のタイトル
-        title_label: "Title" # タイトルのフォームラベル
-        content_label: "Content" # 内容のフォームラベル
+        title_label: "Title" # タイトルのフォーム対応者
+        content_label: "Content" # 内容のフォーム対応者
         create_button: "Create Task" # タスクを登録するボタン
         back_link: "Back" # タスク一覧画面に戻るリンク
         deadline_label: "deadline_on"
@@ -41,8 +41,8 @@ en:
         back_link: "Back" # タスク一覧画面に戻るリンク
       task_edit: # 追加
         page_title: "Edit Task" # 画面のタイトル
-        title_label: "Title" # タイトルのフォームラベル
-        content_label: "Content" # 内容のフォームラベル
+        title_label: "Title" # タイトルのフォーム対応者
+        content_label: "Content" # 内容のフォーム対応者
         update_button: "Update Task" # タスクを更新するボタン
         back_link: "Back" # タスク詳細画面に戻るリンク
   flash:

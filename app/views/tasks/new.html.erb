@@ -1,6 +1,53 @@
 <h1><%= t('forms.new_task.page_title') %></h1>
 
-<%= render 'form', task: @task, button_id: 'create-task'%>
+<%= render 'form', task: @task, button_text: t('forms.new_task.create_button'), button_id: 'create-task'%>
+
+<!-- タスク一覧の表示 -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t('table_headers.task.title') %></th>
+      <th><%= t('table_headers.task.content') %></th>
+      <th><%= t('table_headers.task.created_at') %></th>
+      <th><%= link_to t('table_headers.task.deadline_on'), tasks_path(sort: 'deadline_on', direction: 'asc'), class: 'text-decoration-none' %></th>
+      <th><%= link_to t('table_headers.task.priority'), tasks_path(sort: 'priority', direction: 'desc'), class: 'text-decoration-none' %></th>
+      <th><%= t('table_headers.task.status') %></th>
+      <th>対応者</th>
+      <th>完了</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @tasks.present? %>
+      <% @tasks.each do |task| %>
+        <tr id="task-<%= task.id %>">
+          <td><%= task.title %></td>
+          <td><%= task.content %></td>
+          <td><%= task.created_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M:%S') %></td>
+          <td><%= task.deadline_on %></td>
+          <td><%= task.display_priority %></td>
+          <td><%= task.display_status %></td>
+          <td><%= task.labels.map(&:name).join(', ') %></td>
+          <td>
+            <%= check_box_tag "task_complete_#{task.id}", task.id, false, class: "task-complete", data: { url: complete_task_path(task), id: task.id } %>
+          </td>
+          <td><%= link_to t('links.task_create.show_task'), task_path(task), class: 'btn btn-primary show-task' %></td>
+          <td><%= link_to t('links.task_create.edit_task'), edit_task_path(task), class: 'btn btn-primary edit-task' %></td>
+          <td><%= link_to t('links.task_create.destroy_task'), task, method: :delete, data: { confirm: t('confirmations.delete_task') }, class: 'btn btn-danger destroy-task' %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="11"><%= t('messages.no_tasks') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<!-- ページネーションリンクの追加 -->
+<div class="pagination">
+  <%= paginate @tasks %>
+</div>
 
 
-<%= link_to t('forms.new_task.back_link'), tasks_path, id: 'back' %>
+<%= link_to t('forms.new_task.back_link'), tasks_path, class: 'btn btn-secondary mt-2', id: 'back' %>

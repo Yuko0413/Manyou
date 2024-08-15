@@ -1,15 +1,15 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete]
+  before_action :authorize_user, only: [:show, :edit, :update, :destroy, :complete]
 
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.where.not(status: 'completed')
 
     # 検索条件の適用
     if params[:search]
       @tasks = @tasks.with_status(params[:search][:status])
-                      .with_title(params[:search][:title])
+                     .with_title(params[:search][:title])
+                     .with_label(params[:search][:label])
     end
 
     # ソート条件が存在する場合は適用
@@ -20,25 +20,35 @@ class TasksController < ApplicationController
         @tasks = @tasks.order("#{params[:sort]} #{params[:direction]}")
       end
     else
-      @tasks = @tasks.sorted_by_created_at
+      @tasks = @tasks.order(deadline_on: :asc)  # ここで終了期限の昇順にソート
     end
 
     @tasks = @tasks.page(params[:page]).per(10)
-
-    # デバッグ用のログ出力
-    logger.debug "検索条件: #{params[:search].inspect}" if params[:search]
-    logger.debug "ソート条件: sort=#{params[:sort]}, direction=#{params[:direction]}"
   end
 
   def new
     @task = Task.new
+    @tasks = current_user.tasks.where.not(status: 'completed').page(params[:page]).per(10)
+  end
+
+  def complete
+    @task.update(status: 'completed', completed_at: Time.current)
+    respond_to do |format|
+      format.html { redirect_to tasks_url, notice: 'Task was successfully completed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def completed
+    @completed_tasks = Task.where(status: 'completed').order(completed_at: :desc)
   end
 
   def create
     @task = current_user.tasks.build(task_params)
     if @task.save
-      redirect_to tasks_path, notice: t('flash.task.create_success')
+      redirect_to new_task_path, notice: t('flash.task.create_success')
     else
+      @tasks = current_user.tasks.where.not(status: 'completed').page(params[:page]).per(10)  # ここでも完了したタスクを除外
       render :new #, status: unprocessable_entity
     end
   end
@@ -51,7 +61,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to @task, notice: t('flash.task.update_success')
+      redirect_to tasks_path, notice: t('flash.task.update_success')
     else
       render :edit
     end
@@ -69,12 +79,10 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
+    params.require(:task).permit(:title, :content, :deadline_on, :priority, :status, { label_ids: [] })
   end
 
   def authorize_user
-    if @task.user != current_user
-      redirect_to tasks_path, notice: 'アクセス権限がありません'
-    end
+    redirect_to tasks_path, notice: 'アクセス権限がありません' unless @task.user == current_user
   end
 end

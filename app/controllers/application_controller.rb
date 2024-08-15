@@ -15,8 +15,15 @@ class ApplicationController < ActionController::Base
   #   { locale: I18n.locale }.merge options
   # end
 
-  def current_user  # 追加
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  def current_user
+    if session[:user_id]
+      begin
+        @current_user ||= User.find(session[:user_id])
+      rescue ActiveRecord::RecordNotFound
+        session[:user_id] = nil
+        redirect_to new_session_path, alert: "ログインが必要です"
+      end
+    end
   end
 
   def logged_in?  # 追加

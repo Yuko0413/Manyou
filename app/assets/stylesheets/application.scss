@@ -1,0 +1,62 @@
+// Import Bootstrap
+@import 'bootstrap';
+
+// Import other stylesheets
+@import 'tasks';
+
+.navbar-nav .nav-link {
+    margin-right: 10px;
+}
+
+.alert {
+    margin-top: 10px;
+}
+
+/* カスタムスタイルの追加 */
+.custom-navbar {
+    background-color: #F9DDED; /* ここに希望する色を設定します */
+}
+
+/* サイドバーのスタイル */
+#wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  width: 250px;
+  transition: margin 0.25s ease-out;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+#page-content-wrapper {
+  flex: 1;
+  padding: 20px;
+}
+
+/* スマホサイズでサイドバーを非表示にする 
+@media (max-width: 767px) {
+  #sidebar-wrapper {
+    display: none;
+  }
+
+  #page-content-wrapper {
+    flex: 1 0 100%;
+    padding: 20px;
+  }
+}
+  */
+
+/* フッターのスタイル */
+.footer {
+  padding: 10px 0;
+  border-top: 1px solid #e7e7e7;
+}
+
+.footer .col {
+  flex: 1;
+}

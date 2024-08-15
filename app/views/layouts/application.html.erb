@@ -7,30 +7,72 @@
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-  <header>
-    <nav>
-      <ul>
+  <div class="d-flex" id="wrapper">
+    <!-- サイドバー -->
+    <div class="bg-light border-right d-none d-md-block d-lg-block" id="sidebar-wrapper">
+      <div class="sidebar-heading">Carepro</div>
+      <div class="list-group list-group-flush">
         <% if logged_in? %>
           <% if current_user&.admin? %>
-            <li><%= link_to "ユーザ一覧", admin_users_path, id: 'users-index' %></li>
-            <li><%= link_to "ユーザを登録する", new_admin_user_path, id: 'add-user' %></li>
+            <%= link_to "ユーザ一覧", admin_users_path, class: 'list-group-item list-group-item-action bg-light' %>
+            <%= link_to "ユーザを登録する", new_admin_user_path, class: 'list-group-item list-group-item-action bg-light' %>
           <% end %>
-          <li><%= link_to t('links.global.tasks_index'), root_path, id: 'tasks-index' %></li>
-          <li><%= link_to t('links.global.new_task'), new_task_path, id: 'new-task' %></li>
-          <li><%= link_to t('links.global.account_setting'), user_path(current_user), id: 'account-setting' %></li>
-          <li><%= link_to t('links.global.logout'), session_path(current_user), method: :delete, id: 'sign-out' %></li>
+          <%= link_to t('links.global.tasks_index'), root_path, class: 'list-group-item list-group-item-action bg-light' %>
+          <%= link_to t('links.global.new_task'), new_task_path, class: 'list-group-item list-group-item-action bg-light' %>
+          <%= link_to 'ラベル一覧', labels_path, class: 'list-group-item list-group-item-action bg-light' %>
+          <%= link_to 'ラベルを登録する', new_label_path, class: 'list-group-item list-group-item-action bg-light' %>
+          <%= link_to '完了したタスク', completed_tasks_path, class: 'list-group-item list-group-item-action bg-light' %>
+          <%= link_to t('links.global.account_setting'), user_path(current_user), class: 'list-group-item list-group-item-action bg-light' %>
+          <%= link_to t('links.global.logout'), session_path(current_user), method: :delete, class: 'list-group-item list-group-item-action bg-light' %>
         <% else %>
-          <li><%= link_to t('links.global.sign_up'), new_user_path, id: 'sign-up' %></li>
-          <li><%= link_to t('links.global.sign_in'), new_session_path, id: 'sign-in' %></li>
+          <%= link_to t('links.global.sign_up'), new_user_path, class: 'list-group-item list-group-item-action bg-light' %>
+          <%= link_to t('links.global.sign_in'), new_session_path, class: 'list-group-item list-group-item-action bg-light' %>
         <% end %>
-      </ul>
-    </nav>
-  </header>
+      </div>
+    </div>
 
-  <p id="notice"><%= notice %></p>
-  <%= yield %>    
+    <!-- メインコンテンツ 
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">メニュー</button>
+      </nav>-->
+
+      <div class="container-fluid">
+        <p id="notice" class="alert alert-info"><%= notice %></p>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+
+  <!-- フッターナビゲーション -->
+  <footer class="footer fixed-bottom bg-light d-lg-none ">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <a href="<%= root_path %>"><i class="fas fa-home"></i></a>
+        </div>
+        <div class="col">
+          <a href="<%= new_task_path %>"><i class="fas fa-plus"></i></a>
+        </div>
+        <div class="col">
+          <a href="<%= labels_path %>"><i class="fas fa-tags"></i></a>
+        </div>
+        <div class="col">
+          <a href="<%= completed_tasks_path %>"><i class="fas fa-check"></i></a>
+        </div>
+        <div class="col">
+          <% if logged_in? %>
+            <a href="<%= user_path(current_user) %>"><i class="fas fa-user"></i></a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </body>
 </html>
